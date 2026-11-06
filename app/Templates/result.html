@@ -1,20 +1,175 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Food Recognition Result</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recognition Result - {{ food }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f97316;
+            --primary-hover: #ea580c;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --accent-green: #10b981;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #f1f5f9 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .container {
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px -15px rgba(249, 115, 22, 0.12), 0 0 1px 1px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 680px;
+            overflow: hidden;
+        }
+        .header {
+            padding: 28px 32px;
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .badge-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .confidence-tag {
+            background: #dcfce7;
+            color: #15803d;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+        .origin-tag {
+            background: #ffedd5;
+            color: #c2410c;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+        h1 {
+            color: var(--text-dark);
+            font-size: 28px;
+            font-weight: 800;
+        }
+        .image-container {
+            width: 100%;
+            max-height: 380px;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .content {
+            padding: 32px;
+        }
+        .section-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ingredients-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+        .ingredients-list li {
+            background: #f1f5f9;
+            color: #334155;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+        }
+        .recipe-box {
+            background: #fafaf9;
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: 8px;
+            color: #334155;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .btn-back {
+            display: block;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: background 0.2s;
+            box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
+        }
+        .btn-back:hover {
+            background: var(--primary-hover);
+        }
+    </style>
 </head>
 <body>
-    <h1>Detected Food: {{ food }}</h1>
-    <img src="{{ image }}" alt="Food Image" style="width:300px;">
-    <h2>Origin: {{ info.origin }}</h2>
-    <h3>Ingredients:</h3>
-    <ul>
-        {% for item in info.ingredients %}
-            <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
-    <h3>Recipe:</h3>
-    <p>{{ info.recipe }}</p>
-    <a href="/">Try another image</a>
+    <div class="container">
+        <div class="header">
+            <div class="badge-row">
+                <span class="confidence-tag">✓ {{ confidence }}% Match</span>
+                <span class="origin-tag">📍 {{ info.origin }}</span>
+            </div>
+            <h1>{{ food }}</h1>
+        </div>
+
+        <div class="image-container">
+            <img src="{{ image }}" alt="{{ food }}">
+        </div>
+
+        <div class="content">
+            <div class="section-title">🥗 Key Ingredients</div>
+            <ul class="ingredients-list">
+                {% for item in info.ingredients %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+
+            <div class="section-title">🍳 Culinary Recipe & Preparation</div>
+            <div class="recipe-box">
+                {{ info.recipe }}
+            </div>
+
+            <a href="/" class="btn-back">← Classify Another Dish</a>
+        </div>
+    </div>
 </body>
 </html>

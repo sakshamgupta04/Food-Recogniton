@@ -36,6 +36,9 @@ Thumbs.db
 
 # Flask uploads
 static/uploads/
+Static/uploads/
+app/Static/uploads/
+app/static/uploads/
 instance/
 *.db
 *.sqlite3
@@ -48,6 +51,12 @@ dataset/
 runs/
 weights/
 results/
+# Large Model Weights
+app/models/
+*.bin
+*.pth
+*.safetensors
+*.onnx
 *.pt  # YOLO models (best.pt, last.pt)
 
 # Images / Outputs
@@ -56,6 +65,8 @@ results/
 *.png
 *.bmp
 *.gif
+*.webp
+*.avif
 
 # System files
 desktop.ini

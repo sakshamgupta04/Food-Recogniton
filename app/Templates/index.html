@@ -1,13 +1,155 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Food Recognition</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Food Recognition & Recipe Finder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f97316;
+            --primary-hover: #ea580c;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #f1f5f9 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px -15px rgba(249, 115, 22, 0.15), 0 0 1px 1px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 520px;
+            padding: 40px 32px;
+            text-align: center;
+        }
+        .icon-badge {
+            width: 64px;
+            height: 64px;
+            background: #ffedd5;
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+        }
+        h1 {
+            color: var(--text-dark);
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 30px;
+        }
+        .upload-area {
+            border: 2px dashed #fdba74;
+            border-radius: 14px;
+            padding: 32px 20px;
+            background: #fffaf5;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: #fff7ed;
+        }
+        .upload-area input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .upload-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .upload-text {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        .file-hint {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+        .file-preview-name {
+            margin-top: 10px;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 14px;
+        }
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 24px;
+            transition: background 0.2s;
+            box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
+        }
+        .btn-submit:hover {
+            background: var(--primary-hover);
+        }
+    </style>
 </head>
 <body>
-    <h1>Upload a Food Image</h1>
-    <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="file" required>
-        <button type="submit">Upload</button>
-    </form>
+    <div class="container">
+        <div class="icon-badge">🍲</div>
+        <h1>Food Recognition</h1>
+        <p class="subtitle">Upload any food image to identify the dish, its culinary origin, ingredients, and recipe.</p>
+
+        <form method="POST" enctype="multipart/form-data">
+            <div class="upload-area" id="drop-zone">
+                <input type="file" name="file" id="file-input" accept="image/*" required>
+                <span class="upload-icon">📸</span>
+                <div class="upload-text">Click or drag & drop image here</div>
+                <div class="file-hint">Supports JPG, PNG, WEBP</div>
+                <div class="file-preview-name" id="filename-display"></div>
+            </div>
+
+            <button type="submit" class="btn-submit">Recognize Food 🚀</button>
+        </form>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const filenameDisplay = document.getElementById('filename-display');
+
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                filenameDisplay.textContent = 'Selected: ' + this.files[0].name;
+            }
+        });
+    </script>
 </body>
 </html>
