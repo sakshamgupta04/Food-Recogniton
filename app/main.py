@@ -31,7 +31,7 @@ def index():
             file.save(filepath)
 
             # Predict food using the classifier
-            food_name, confidence = predict_food(filepath)
+            food_name, confidence, top_predictions = predict_food(filepath, top_k=5)
             info = get_food_info(food_name)
 
             # Web image URL
@@ -41,6 +41,7 @@ def index():
                 'result.html',
                 food=food_name,
                 confidence=confidence,
+                predictions=top_predictions,
                 info=info,
                 image=image_url
             )

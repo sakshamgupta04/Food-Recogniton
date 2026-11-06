@@ -25,10 +25,13 @@ else:
 model.eval()
 print("Food Classifier loaded successfully!")
 
-def predict_food(image_path):
+def predict_food(image_path, top_k=5):
     """
     Predicts the food category from an image file.
-    Returns: (food_name, confidence_percent)
+    Returns:
+        top_name (str): The top predicted food dish.
+        top_confidence (float): Confidence percentage of the top dish.
+        top_predictions (list): List of dicts with name & confidence for top K predictions.
     """
     image = Image.open(image_path).convert("RGB")
     inputs = processor(images=image, return_tensors="pt")
@@ -37,11 +40,19 @@ def predict_food(image_path):
         outputs = model(**inputs)
         logits = outputs.logits
         probs = torch.nn.functional.softmax(logits, dim=-1)
-        top_prob, top_idx = torch.topk(probs, 1)
+        top_probs, top_indices = torch.topk(probs, min(top_k, probs.shape[-1]))
 
-    predicted_label = model.config.id2label[top_idx.item()]
-    confidence = top_prob.item() * 100.0
+    top_predictions = []
+    for prob, idx in zip(top_probs[0], top_indices[0]):
+        raw_label = model.config.id2label[idx.item()]
+        conf = round(prob.item() * 100.0, 1)
+        formatted_name = raw_label.replace("_", " ").title()
+        top_predictions.append({
+            "name": formatted_name,
+            "confidence": conf
+        })
 
-    # Format label e.g., 'spaghetti_bolognese' -> 'Spaghetti Bolognese'
-    formatted_label = predicted_label.replace("_", " ").title()
-    return formatted_label, round(confidence, 1)
+    top_name = top_predictions[0]["name"]
+    top_confidence = top_predictions[0]["confidence"]
+
+    return top_name, top_confidence, top_predictions

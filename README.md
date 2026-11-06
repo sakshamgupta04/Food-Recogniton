@@ -80,3 +80,4 @@ python app/test.py
 - **Deep Learning**: PyTorch, Hugging Face Transformers, Torchvision, Ultralytics YOLOv8
 - **Computer Vision**: OpenCV, Pillow
 - **Frontend**: HTML5, Modern CSS
+
