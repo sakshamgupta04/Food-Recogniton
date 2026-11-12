@@ -1,3 +1,13 @@
+"""
+=============================================================================
+Food Recognition & Recipe Finder - Food-101 Dataset Split Preparation
+Author: Saksham Gupta
+GitHub: https://github.com/sakshamgupta04
+Repository: https://github.com/sakshamgupta04/Food-Recogniton
+Copyright (c) 2026 Saksham Gupta. All rights reserved.
+=============================================================================
+"""
+
 import os
 import shutil
 
@@ -25,10 +35,12 @@ def copy_images(txt_file, split_dir):
         if not os.path.exists(dst):
             shutil.copy(src, dst)
 
-print("Preparing train split...")
-copy_images(train_txt, train_dir)
+if __name__ == "__main__":
+    print("Preparing Food-101 dataset splits...")
+    print("Preparing train split...")
+    copy_images(train_txt, train_dir)
 
-print("Preparing val split...")
-copy_images(val_txt, val_dir)
+    print("Preparing val split...")
+    copy_images(val_txt, val_dir)
 
-print("Dataset prepared successfully!")
+    print("Dataset prepared successfully!")

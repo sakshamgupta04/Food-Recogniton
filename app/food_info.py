@@ -1,5 +1,11 @@
 """
-Food information database mapping food items to origin, ingredients, recipe, and nutritional estimates.
+=============================================================================
+Food Recognition & Recipe Finder - Culinary Knowledgebase & Nutrition
+Author: Saksham Gupta
+GitHub: https://github.com/sakshamgupta04
+Repository: https://github.com/sakshamgupta04/Food-Recogniton
+Copyright (c) 2026 Saksham Gupta. All rights reserved.
+=============================================================================
 """
 
 food_database = {

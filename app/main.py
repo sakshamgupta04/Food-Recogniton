@@ -1,3 +1,13 @@
+"""
+=============================================================================
+Food Recognition & Recipe Finder - Web Application
+Author: Saksham Gupta
+GitHub: https://github.com/sakshamgupta04
+Repository: https://github.com/sakshamgupta04/Food-Recogniton
+Copyright (c) 2026 Saksham Gupta. All rights reserved.
+=============================================================================
+"""
+
 import os
 from flask import Flask, render_template, request, url_for, redirect
 from food_info import get_food_info
@@ -46,10 +56,17 @@ def index():
                     image=image_url
                 )
             except Exception as e:
-                return render_template('index.html', error=f"Could not read the uploaded image ({str(e)}). Please upload a standard JPG, PNG, or WEBP image.")
+                return render_template(
+                    'index.html',
+                    error=f"Could not read the uploaded image ({str(e)}). Please upload a standard JPG, PNG, or WEBP image."
+                )
 
     return render_template('index.html')
 
 if __name__ == "__main__":
-    print("Starting Food Recognition Web App on http://127.0.0.1:5000 ...")
+    print("=" * 60)
+    print("Food Recognition Web App by Saksham Gupta")
+    print("GitHub: https://github.com/sakshamgupta04")
+    print("Starting server on http://127.0.0.1:5000 ...")
+    print("=" * 60)
     app.run(host='127.0.0.1', port=5000, debug=False)

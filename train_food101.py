@@ -1,14 +1,26 @@
+"""
+=============================================================================
+Food Recognition & Recipe Finder - YOLOv8 Classification Training Pipeline
+Author: Saksham Gupta
+GitHub: https://github.com/sakshamgupta04
+Repository: https://github.com/sakshamgupta04/Food-Recogniton
+Copyright (c) 2026 Saksham Gupta. All rights reserved.
+=============================================================================
+"""
+
 import os
 from ultralytics import YOLO
 
-# Paths
+# Paths & Hyperparameters
 DATASET_PATH = "dataset/food101"
 MODEL_NAME = "yolov8n-cls.pt"   # Lightweight model
 EPOCHS = 30                     # Number of training epochs
 IMAGE_SIZE = 224                # Image resolution
 
 def train_model():
-    print("Starting YOLOv8 Classification Training...")
+    print("=" * 60)
+    print("Starting YOLOv8 Food Classification Training (Saksham Gupta)...")
+    print("=" * 60)
     model = YOLO(MODEL_NAME)
     
     # Train the model
@@ -39,11 +51,10 @@ def test_model(weights_path, test_image):
     return top_class
 
 if __name__ == "__main__":
-    # Train
     best_weights = train_model()
 
     # Test with a sample image
-    test_image = "test_food.jpg"  # Change this to your image path
+    test_image = "test_food.jpg"
     if os.path.exists(test_image):
         test_model(best_weights, test_image)
     else:

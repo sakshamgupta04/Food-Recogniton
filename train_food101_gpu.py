@@ -1,5 +1,11 @@
 """
-Train YOLOv8 Classification on Food-101 with explicit GPU selection.
+=============================================================================
+Food Recognition & Recipe Finder - GPU-Accelerated YOLOv8 Training
+Author: Saksham Gupta
+GitHub: https://github.com/sakshamgupta04
+Repository: https://github.com/sakshamgupta04/Food-Recogniton
+Copyright (c) 2026 Saksham Gupta. All rights reserved.
+=============================================================================
 
 Usage (recommended):
     python train_food101_gpu.py --data dataset/food101 --device 0 --epochs 30 --batch 32
@@ -14,7 +20,7 @@ from ultralytics import YOLO
 
 
 def parse_args():
-    p = argparse.ArgumentParser(description="Train YOLOv8 Classification on Food-101 (GPU-aware).")
+    p = argparse.ArgumentParser(description="Train YOLOv8 Classification on Food-101 (GPU-aware by Saksham Gupta).")
     p.add_argument("--data", type=str, default="dataset/food101",
                    help="Path to dataset root containing train/ and val/ dirs.")
     p.add_argument("--model", type=str, default="yolov8n-cls.pt",
@@ -44,7 +50,6 @@ def resolve_device(arg_device: str):
         return "cpu"
     if arg_device == "auto":
         return 0 if torch.cuda.is_available() else "cpu"
-    # user passed index like "0" or "1"
     try:
         return int(arg_device)
     except ValueError:
@@ -58,12 +63,12 @@ def main():
     device = resolve_device(args.device)
 
     print("-" * 60)
-    print("GPU / CUDA Check")
+    print("GPU / CUDA Diagnostic Check (Saksham Gupta)")
     print(f"torch.cuda.is_available(): {torch.cuda.is_available()}")
     if torch.cuda.is_available():
         print(f"Detected GPU 0: {torch.cuda.get_device_name(0)}")
     else:
-        print("No CUDA GPU detected; training will run on CPU (slow).")
+        print("No CUDA GPU detected; training will run on CPU.")
     print(f"Using device={device}")
     print("-" * 60)
 
@@ -101,7 +106,7 @@ def main():
     if os.path.exists(best_path):
         print(f"Best weights: {best_path}")
     else:
-        print("best.pt not found; check run folder. (Maybe training stopped early?)")
+        print("best.pt not found; check run folder.")
 
     if os.path.exists(last_path):
         print(f"Last weights: {last_path}")

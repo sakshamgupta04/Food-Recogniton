@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Food Recognition & Recipe Finder</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="author" content="Saksham Gupta">
+    <meta name="description" content="AI Food Recognition & Recipe Finder - Built by Saksham Gupta">
+    <title>AI Food Recognition & Recipe Finder | Saksham Gupta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #f97316;
@@ -30,16 +32,32 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 24px 20px;
         }
         .container {
             background: var(--card-bg);
-            border-radius: 20px;
+            border-radius: 24px;
             box-shadow: 0 20px 40px -15px rgba(249, 115, 22, 0.15), 0 0 1px 1px rgba(0, 0, 0, 0.05);
             width: 100%;
             max-width: 520px;
-            padding: 40px 32px;
+            padding: 40px 32px 32px;
             text-align: center;
+            position: relative;
+        }
+        .author-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #fff7ed;
+            color: #ea580c;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: 20px;
+            border: 1px solid #ffedd5;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .icon-badge {
             width: 64px;
@@ -50,18 +68,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
+            margin: 0 auto 16px;
             font-size: 32px;
         }
         h1 {
             color: var(--text-dark);
             font-size: 26px;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 8px;
         }
         p.subtitle {
             color: var(--text-muted);
-            font-size: 15px;
+            font-size: 14.5px;
+            line-height: 1.5;
             margin-bottom: 24px;
         }
         .error-box {
@@ -69,14 +88,14 @@
             color: var(--error-text);
             border: 1px solid var(--error-border);
             padding: 12px 16px;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 14px;
             margin-bottom: 20px;
             text-align: left;
         }
         .upload-area {
             border: 2px dashed #fdba74;
-            border-radius: 14px;
+            border-radius: 16px;
             padding: 32px 20px;
             background: #fffaf5;
             cursor: pointer;
@@ -122,21 +141,46 @@
             border: none;
             width: 100%;
             padding: 14px;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             margin-top: 24px;
-            transition: background 0.2s;
+            transition: all 0.2s;
             box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
         }
         .btn-submit:hover {
             background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+        .footer-credit {
+            margin-top: 26px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border-color);
+            font-size: 13px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .footer-credit a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-credit a:hover {
+            text-decoration: underline;
+            color: var(--primary-hover);
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="author-pill">
+            👨‍💻 Saksham Gupta Project
+        </div>
         <div class="icon-badge">🍲</div>
         <h1>Food Recognition</h1>
         <p class="subtitle">Upload any food image to identify the dish, nutritional breakdown, ingredients, and recipe.</p>
@@ -158,6 +202,10 @@
 
             <button type="submit" class="btn-submit">Recognize Food 🚀</button>
         </form>
+
+        <div class="footer-credit">
+            Developed by <a href="https://github.com/sakshamgupta04" target="_blank" rel="noopener noreferrer">Saksham Gupta</a> • © 2026
+        </div>
     </div>
 
     <script>

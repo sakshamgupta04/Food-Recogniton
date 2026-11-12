@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recognition Result - {{ food }}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="author" content="Saksham Gupta">
+    <meta name="description" content="Food Recognition Result - Developed by Saksham Gupta">
+    <title>Recognition Result - {{ food }} | Saksham Gupta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #f97316;
@@ -48,6 +50,7 @@
             align-items: center;
             gap: 12px;
             margin-bottom: 10px;
+            flex-wrap: wrap;
         }
         .confidence-tag {
             background: #dcfce7;
@@ -64,6 +67,15 @@
             font-weight: 600;
             padding: 4px 10px;
             border-radius: 20px;
+        }
+        .author-tag {
+            background: #f1f5f9;
+            color: #475569;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-left: auto;
         }
         h1 {
             color: var(--text-dark);
@@ -182,12 +194,29 @@
             padding: 14px;
             border-radius: 12px;
             font-size: 15px;
-            font-weight: 600;
-            transition: background 0.2s;
+            font-weight: 700;
+            transition: all 0.2s;
             box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
         }
         .btn-back:hover {
             background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+        .footer-credit {
+            margin-top: 26px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border-color);
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+        .footer-credit a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .footer-credit a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -197,6 +226,7 @@
             <div class="badge-row">
                 <span class="confidence-tag">✓ {{ confidence }}% Match</span>
                 <span class="origin-tag">📍 {{ info.origin }}</span>
+                <span class="author-tag">Saksham Gupta</span>
             </div>
             <h1>{{ food }}</h1>
         </div>
@@ -258,6 +288,10 @@
             </div>
 
             <a href="/" class="btn-back">← Classify Another Dish</a>
+
+            <div class="footer-credit">
+                Food Recognition & Recipe Finder • Developed by <a href="https://github.com/sakshamgupta04" target="_blank" rel="noopener noreferrer">Saksham Gupta</a> • © 2026
+            </div>
         </div>
     </div>
 </body>

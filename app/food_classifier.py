@@ -1,3 +1,13 @@
+"""
+=============================================================================
+Food Recognition & Recipe Finder - Food Classification Pipeline
+Author: Saksham Gupta
+GitHub: https://github.com/sakshamgupta04
+Repository: https://github.com/sakshamgupta04/Food-Recogniton
+Copyright (c) 2026 Saksham Gupta. All rights reserved.
+=============================================================================
+"""
+
 import os
 from PIL import Image
 import torch
@@ -10,24 +20,32 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LOCAL_MODEL_DIR = os.path.join(BASE_DIR, "models", "food_classifier")
-MODEL_ID = "nateraw/food"
+FALLBACK_MODEL_ID = "nateraw/food"
 
-print("Loading Food Classifier model...")
+print("=" * 60)
+print("Loading Food Classification Model (Saksham Gupta)...")
+
 if os.path.isdir(LOCAL_MODEL_DIR) and os.path.exists(os.path.join(LOCAL_MODEL_DIR, "config.json")):
-    print(f"Loading from local weights: {LOCAL_MODEL_DIR}")
+    print(f"Loading local fine-tuned model from: {LOCAL_MODEL_DIR}")
     processor = AutoImageProcessor.from_pretrained(LOCAL_MODEL_DIR, local_files_only=True)
     model = AutoModelForImageClassification.from_pretrained(LOCAL_MODEL_DIR, local_files_only=True)
 else:
-    print(f"Loading from Hugging Face hub: {MODEL_ID}")
-    processor = AutoImageProcessor.from_pretrained(MODEL_ID)
-    model = AutoModelForImageClassification.from_pretrained(MODEL_ID)
+    print(f"Loading Food-101 Vision Transformer checkpoint: {FALLBACK_MODEL_ID}")
+    processor = AutoImageProcessor.from_pretrained(FALLBACK_MODEL_ID)
+    model = AutoModelForImageClassification.from_pretrained(FALLBACK_MODEL_ID)
 
 model.eval()
-print("Food Classifier loaded successfully!")
+print("Food Classification Model loaded successfully!")
+print("=" * 60)
 
 def predict_food(image_path, top_k=5):
     """
     Predicts the food category from an image file.
+    
+    Args:
+        image_path (str): Path to image file.
+        top_k (int): Number of top predictions to return.
+        
     Returns:
         top_name (str): The top predicted food dish.
         top_confidence (float): Confidence percentage of the top dish.
